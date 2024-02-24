@@ -1,15 +1,18 @@
 package test.java.pages.components;
 
 import com.github.javafaker.Faker;
+import config.UserConfig;
+import org.aeonbits.owner.ConfigFactory;
 
 import java.util.HashMap;
 import java.util.Locale;
 
 public class TestRandomData {
     static Faker faker = new Faker(new Locale("ru"));
-    public String firstName = faker.name().firstName(),
-            lastName = faker.name().lastName(),
-            inputEmail = faker.internet().emailAddress(String.valueOf(new Locale("en"))),
+    UserConfig userConfig = ConfigFactory.create(UserConfig.class);
+    public String firstName = userConfig.firstName(),
+            lastName = userConfig.lastName(),
+            inputEmail = userConfig.userEmail(),
             inputGender = faker.options().option("Male", "Female", "Other"),
             inputPhone = faker.phoneNumber().subscriberNumber(10),
             setRandomDay = Integer.toString(faker.number().numberBetween(1, 31)),
@@ -19,7 +22,7 @@ public class TestRandomData {
             randomYear = String.valueOf(faker.number().numberBetween(1900, 2050)),
             inputSubject = faker.options().option("Maths", "Arts", "English", "Biology", "Hindi", "Commerce"),
             inputHobby = faker.options().option("Sports", "Reading", "Music"),
-            pictureName = "1.jpeg",
+            pictureName = userConfig.imageName(),
             inputAddress = faker.address().fullAddress(),
             inputAddress2 = faker.address().fullAddress(),
             inputCity = faker.options().option("Delhi", "Agra", "Karnal", "Gurgaon", "Lucknow", "Panipat", "Jaipur", "Jaiselmer"),
